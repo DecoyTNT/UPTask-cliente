@@ -1,9 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import proyectoContext from '../../context/proyectos/proyectoContext';
 
 const SideBar = () => {
 
-    const { proyectos } = useContext(proyectoContext);
+    const { proyectos, obtenerProyectos, obtenerProyectoId, mostrarFormulario } = useContext(proyectoContext);
+
+    useEffect(() => {
+        obtenerProyectos();
+        // eslint-disable-next-line
+    }, []);
+
+    // console.log(proyectos)
 
     return (
         <aside
@@ -12,20 +19,25 @@ const SideBar = () => {
             <div
                 className="panel crear-proyecto"
             >
-                <button type="button" className="boton">Nuevo Proyecto<span>+</span></button>
+                <button
+                    type="button"
+                    className="boton"
+                    onClick={mostrarFormulario}
+                >Nuevo Proyecto<span>+</span></button>
             </div>
             <div className="panel lista-proyectos">
                 <h2>Proyectos</h2>
                 <ul id="proyectos" className="proyectos">
                     {proyectos.map(project => (
-                        <li key={project.id} >{project.nombre}</li>
+                        <li key={project.id} >
+                            <button
+                                className="btn-lista-proyectos"
+                                onClick={() => obtenerProyectoId(project.id)}
+                            >
+                                {project.nombre}
+                            </button>
+                        </li>
                     ))}
-                    {/* <li>
-                        Diseño de tienda virtual
-                    </li>
-                    <li>
-                        Diseñar sitio web
-                    </li> */}
                 </ul>
             </div>
         </aside>

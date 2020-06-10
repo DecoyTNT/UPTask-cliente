@@ -151,6 +151,13 @@ body.index {
     margin: 0;
 }
 
+.btn-lista-proyectos {
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
 .crear-proyecto i {
     margin-left: 1rem;
 }
@@ -165,6 +172,7 @@ body.index {
 }
 .lista-proyectos ul li {
     margin-bottom: 1rem;
+    color: white;
 }
 .lista-proyectos ul li a:hover {
     color: #FDD835;
