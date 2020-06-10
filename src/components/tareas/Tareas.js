@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import Swal from 'sweetalert2';
+import FormTarea from './FormTarea';
 import proyectoContext from '../../context/proyectos/proyectoContext';
 
 const Tareas = () => {
@@ -40,6 +41,7 @@ const Tareas = () => {
             <div className="contenido-principal">
                 <h1>{proyectoseleccionado.nombre}</h1>
                 {/* TODO: Formulario aquí */}
+                <FormTarea />
 
                 {/* TODO: Listado de tareas */}
 
