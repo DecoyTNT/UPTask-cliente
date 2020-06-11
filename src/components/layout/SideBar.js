@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import proyectoContext from '../../context/proyectos/proyectoContext';
+import tareaContext from '../../context/tareas/tareaContext';
 
 const SideBar = () => {
 
     const { proyectos, obtenerProyectos, obtenerProyectoId, mostrarFormulario } = useContext(proyectoContext);
+    const { obtenerTareasProyecto } = useContext(tareaContext);
 
     useEffect(() => {
         obtenerProyectos();
@@ -11,6 +13,11 @@ const SideBar = () => {
     }, []);
 
     // console.log(proyectos)
+
+    const onclickProyecto = proyectoId => {
+        obtenerProyectoId(proyectoId);
+        obtenerTareasProyecto(proyectoId);
+    }
 
     return (
         <aside
@@ -32,7 +39,7 @@ const SideBar = () => {
                         <li key={project.id} >
                             <button
                                 className="btn-lista-proyectos"
-                                onClick={() => obtenerProyectoId(project.id)}
+                                onClick={() => onclickProyecto(project.id)}
                             >
                                 {project.nombre}
                             </button>

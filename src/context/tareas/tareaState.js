@@ -3,7 +3,9 @@ import clienteAxios from '../../config/axios';
 import tareaContext from './tareaContext';
 import tareaReducer from './tareaReducer';
 import {
-    AGREGAR_TAREA
+    AGREGAR_TAREA,
+    TAREAS_PROYECTO,
+    EDITAR_TAREA
 } from '../../types';
 
 const TareaState = props => {
@@ -28,13 +30,40 @@ const TareaState = props => {
         }
     }
 
+    const obtenerTareasProyecto = async proyectoId => {
+        try {
+            const resp = await clienteAxios.get(`/tareas/proyecto/${proyectoId}`);
+            dispatch({
+                type: TAREAS_PROYECTO,
+                payload: resp.data.tareas
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const editarTarea = async tarea => {
+        try {
+            const resp = await clienteAxios.put(`/tareas/${tarea.id}`, tarea);
+            // console.log(resp.data.tarea);
+            dispatch({
+                type: EDITAR_TAREA,
+                payload: resp.data.tarea
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <tareaContext.Provider
             value={{
                 tareasproyecto: state.tareasproyecto,
                 errortarea: state.errortarea,
                 tareaseleccionada: state.tareaseleccionada,
-                agregarTarea
+                agregarTarea,
+                obtenerTareasProyecto,
+                editarTarea
             }}
         >
             {props.children}
