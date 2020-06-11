@@ -5,7 +5,8 @@ import tareaReducer from './tareaReducer';
 import {
     AGREGAR_TAREA,
     TAREAS_PROYECTO,
-    EDITAR_TAREA
+    EDITAR_TAREA,
+    ELIMINAR_TAREA
 } from '../../types';
 
 const TareaState = props => {
@@ -55,6 +56,18 @@ const TareaState = props => {
         }
     }
 
+    const eliminarTarea = async id => {
+        try {
+            await clienteAxios.delete(`/tareas/${id}`);
+            dispatch({
+                type: ELIMINAR_TAREA,
+                payload: id
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <tareaContext.Provider
             value={{
@@ -63,7 +76,8 @@ const TareaState = props => {
                 tareaseleccionada: state.tareaseleccionada,
                 agregarTarea,
                 obtenerTareasProyecto,
-                editarTarea
+                editarTarea,
+                eliminarTarea
             }}
         >
             {props.children}

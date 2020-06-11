@@ -3,7 +3,7 @@ import tareaContext from '../../context/tareas/tareaContext';
 
 const ListadoTareas = () => {
 
-    const { tareasproyecto, editarTarea } = useContext(tareaContext);
+    const { tareasproyecto, editarTarea, eliminarTarea } = useContext(tareaContext);
 
     // if (tareasproyecto.length <= 0) return null;
     const cambiarEstado = tarea => {
@@ -25,7 +25,10 @@ const ListadoTareas = () => {
                                 className={tarea.estado ? "far fa-check-circle completo" : "far fa-check-circle"}
                                 onClick={() => cambiarEstado(tarea)}
                             ></i>
-                            <i className="fas fa-trash"></i>
+                            <i
+                                className="fas fa-trash"
+                                onClick={() => eliminarTarea(tarea.id)}
+                            ></i>
                         </div>
                     </li>
                 ))}
