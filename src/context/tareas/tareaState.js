@@ -68,6 +68,22 @@ const TareaState = props => {
         }
     }
 
+    const actualizarAvance = () => {
+        // Seleccionar las tareas existentes
+        const tareas = state.tareasproyecto;
+
+        if (tareas.length) {
+            // Seleccionar tareas completas
+            const tareasCompletadas = tareas.filter(tarea => tarea.estado === true);
+
+            // Calcular el avance
+            const avance = Math.round(tareasCompletadas.length / tareas.length * 100);
+
+            // Retornar el avance
+            return avance;
+        }
+    }
+
     return (
         <tareaContext.Provider
             value={{
@@ -77,7 +93,8 @@ const TareaState = props => {
                 agregarTarea,
                 obtenerTareasProyecto,
                 editarTarea,
-                eliminarTarea
+                eliminarTarea,
+                actualizarAvance
             }}
         >
             {props.children}
