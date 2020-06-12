@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import tareaContext from '../../context/tareas/tareaContext';
+import Swal from 'sweetalert2';
 
 const ListadoTareas = () => {
 
@@ -9,6 +10,34 @@ const ListadoTareas = () => {
     const cambiarEstado = tarea => {
         tarea.estado = !tarea.estado;
         editarTarea(tarea);
+    }
+
+    const onClickEliminar = id => {
+        Swal.fire({
+            title: 'Quieres eliminar esta tarea',
+            text: "Una vez eliminada no se podrá recuperar",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.value) {
+                eliminarTarea(id);
+                Swal.fire(
+                    'Tarea Eliminada',
+                    'La tarea fue eliminada',
+                    'success'
+                );
+            }
+        }).catch(() => {
+            Swal.fire({
+                type: 'error',
+                title: 'Hubo un error',
+                text: 'No se pudo eliminar la tarea'
+            });
+        })
     }
 
     return (
@@ -27,7 +56,7 @@ const ListadoTareas = () => {
                             ></i>
                             <i
                                 className="fas fa-trash"
-                                onClick={() => eliminarTarea(tarea.id)}
+                                onClick={() => onClickEliminar(tarea.id)}
                             ></i>
                         </div>
                     </li>

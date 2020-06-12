@@ -21,7 +21,7 @@ const TareaState = props => {
     const agregarTarea = async tarea => {
         try {
             const resp = await clienteAxios.post(`/tareas`, tarea);
-            console.log(resp.data.tarea);
+            // console.log(resp.data.tarea);
             dispatch({
                 type: AGREGAR_TAREA,
                 payload: resp.data.tarea

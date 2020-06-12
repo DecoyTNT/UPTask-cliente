@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import FormTarea from './FormTarea';
 import proyectoContext from '../../context/proyectos/proyectoContext';
 import ListadoTareas from './ListadoTareas';
+import BarraAvance from '../layout/BarraAvance';
 
 const Tareas = () => {
 
@@ -46,6 +47,8 @@ const Tareas = () => {
 
                 {/* TODO: Listado de tareas */}
                 <ListadoTareas />
+
+                <BarraAvance />
 
                 {/* TODO: Acciones que se pueden realizar */}
                 <div className="contenedor-acciones">
