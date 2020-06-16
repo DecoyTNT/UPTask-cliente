@@ -4,8 +4,10 @@ import {
     ERROR_USUARIO,
     REDIRECCIONAR,
     OBTENER_USUARIO,
-    ERROR_AUTENTICADO
+    ERROR_AUTENTICADO,
+    CERRAR_SESION
 } from '../../types';
+import tokenAuth from '../../config/token';
 
 export default (state, action) => {
     switch (action.type) {
@@ -52,7 +54,18 @@ export default (state, action) => {
         case ERROR_AUTENTICADO:
             return {
                 ...state,
-                errores: action.payload,
+                cargando: false
+            }
+
+        case CERRAR_SESION:
+            localStorage.removeItem('token');
+            tokenAuth(null);
+            return {
+                ...state,
+                autenticado: null,
+                usuario: null,
+                redireccionar: false,
+                errores: null,
                 cargando: false
             }
 

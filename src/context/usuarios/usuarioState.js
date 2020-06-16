@@ -5,7 +5,8 @@ import {
     ERROR_USUARIO,
     LOGIN_EXITOSO,
     OBTENER_USUARIO,
-    ERROR_AUTENTICADO
+    ERROR_AUTENTICADO,
+    CERRAR_SESION
 } from '../../types';
 import usuarioContext from './usuarioContext';
 import usuarioReducer from './usuarioReducer';
@@ -70,12 +71,16 @@ const UsuarioState = props => {
             });
 
         } catch (error) {
-            console.log(error.response.data.msg);
             dispatch({
                 type: ERROR_AUTENTICADO,
-                payload: error.response.data.msg
             });
         }
+    }
+
+    const cerrarSesion = () => {
+        dispatch({
+            type: CERRAR_SESION
+        })
     }
 
     return (
@@ -89,7 +94,8 @@ const UsuarioState = props => {
                 cargando: state.cargando,
                 crearUsuario,
                 loginUsuario,
-                usuarioAutenticado
+                usuarioAutenticado,
+                cerrarSesion
             }}
         >
             {props.children}

@@ -9,7 +9,7 @@ const NuevaCuenta = (props) => {
         password: ''
     })
 
-    const { errores, redireccionar, autenticado, crearUsuario } = useContext(usuarioContext);
+    const { errores, token, redireccionar, autenticado, crearUsuario, usuarioAutenticado } = useContext(usuarioContext);
 
     useEffect(() => {
         if (redireccionar) {
@@ -17,6 +17,9 @@ const NuevaCuenta = (props) => {
         }
         if (autenticado) {
             props.history.push('/proyectos');
+        }
+        if (token) {
+            usuarioAutenticado();
         }
         // eslint-disable-next-line
     }, [redireccionar, autenticado])

@@ -7,16 +7,19 @@ const Login = (props) => {
     const [usuario, setUsuario] = useState({
         email: '',
         password: ''
-    })
+    });
 
-    const { errores, redireccionar, autenticado, loginUsuario } = useContext(usuarioContext);
+    const { errores, token, redireccionar, autenticado, loginUsuario, usuarioAutenticado } = useContext(usuarioContext);
 
     useEffect(() => {
         if (autenticado) {
             props.history.push('/proyectos');
         }
+        if (token) {
+            usuarioAutenticado();
+        }
         // eslint-disable-next-line
-    }, [autenticado])
+    }, [autenticado]);
 
     const onChangeUsuario = e => {
         setUsuario({
@@ -61,8 +64,9 @@ const Login = (props) => {
                     <div className="campo enviar">
                         <input type="submit" className="boton" value="Iniciar sesión" />
                     </div>
-                    <div className="campo">
+                    <div className="campo acciones">
                         <Link to={'/nueva-cuenta'}>Crear cuenta</Link>
+                        <Link to={'/recuperar-password'}>Olvidaste tu contraseña?</Link>
                     </div>
                 </form>
             </div>

@@ -40,7 +40,7 @@ const ProyectoState = props => {
                 payload: resp.data.proyectos
             })
         } catch (error) {
-            console.log(error);
+            console.log({ error });
         }
     }
 

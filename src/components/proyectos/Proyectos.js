@@ -9,12 +9,14 @@ import usuarioContext from '../../context/usuarios/usuarioContext';
 const Proyectos = () => {
 
     const { formulario, proyectoseleccionado } = useContext(proyectoContext);
-    const { usuarioAutenticado } = useContext(usuarioContext);
+    const { token, usuarioAutenticado } = useContext(usuarioContext);
 
     useEffect(() => {
-        usuarioAutenticado();
+        if (token) {
+            usuarioAutenticado();
+        }
         // eslint-disable-next-line
-    }, [])
+    }, []);
     // console.log(proyectoseleccionado);
 
     return (
