@@ -7,7 +7,7 @@ const Header = () => {
             className="barra"
         >
             <h1>UpTask - Administrador de proyectos</h1>
-            <Link to={'/login'}>Cerrar sesión</Link>
+            <Link to={'/'}>Cerrar sesión</Link>
         </header>
     );
 }

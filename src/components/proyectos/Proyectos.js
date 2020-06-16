@@ -1,13 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from '../layout/Header';
 import SideBar from '../layout/SideBar';
 import NuevoProyecto from './NuevoProyecto';
 import proyectoContext from '../../context/proyectos/proyectoContext';
 import Tareas from '../tareas/Tareas';
+import usuarioContext from '../../context/usuarios/usuarioContext';
 
 const Proyectos = () => {
 
     const { formulario, proyectoseleccionado } = useContext(proyectoContext);
+    const { usuarioAutenticado } = useContext(usuarioContext);
+
+    useEffect(() => {
+        usuarioAutenticado();
+        // eslint-disable-next-line
+    }, [])
     // console.log(proyectoseleccionado);
 
     return (
