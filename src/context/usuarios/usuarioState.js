@@ -19,7 +19,9 @@ const UsuarioState = props => {
         usuario: null,
         redireccionar: false,
         errores: null,
-        cargando: true
+        cargando: true,
+        usuariopassword: null,
+        tokenpassword: null
     }
 
     const [state, dispatch] = useReducer(usuarioReducer, initialState);
@@ -83,6 +85,24 @@ const UsuarioState = props => {
         })
     }
 
+    const tokenPassword = async email => {
+        try {
+            const resp = await clienteAxios.post('/usuarios/reestablecer', { email })
+            console.log(resp);
+        } catch (error) {
+            console.log({ error });
+        }
+    }
+
+    const cambiarPassword = async (password, tokenPassword) => {
+        try {
+            const resp = await clienteAxios.post(`/usuarios/reestablecer/${tokenPassword}`, { password });
+            console.log(resp);
+        } catch (error) {
+            console.log({ error });
+        }
+    }
+
     return (
         <usuarioContext.Provider
             value={{
@@ -92,10 +112,14 @@ const UsuarioState = props => {
                 redireccionar: state.redireccionar,
                 errores: state.errores,
                 cargando: state.cargando,
+                usuariopassword: state.usuariopassword,
+                tokenpassword: state.tokenpassword,
                 crearUsuario,
                 loginUsuario,
                 usuarioAutenticado,
-                cerrarSesion
+                cerrarSesion,
+                tokenPassword,
+                cambiarPassword
             }}
         >
             {props.children}

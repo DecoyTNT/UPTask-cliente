@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import usuarioContext from '../../context/usuarios/usuarioContext';
 
 const RecuperarPassword = () => {
 
     const [email, setEmail] = useState('');
+
+    const { tokenPassword } = useContext(usuarioContext);
+
+    const onSubmitForm = e => {
+        e.preventDefault();
+
+        tokenPassword(email);
+    }
 
     return (
         <div className="login">
@@ -12,6 +21,7 @@ const RecuperarPassword = () => {
                 <p>Agrega tu email para restablecer tu contraseña</p>
                 <form
                     className="caja-login"
+                    onSubmit={onSubmitForm}
                 >
                     <div className="campo">
                         <label htmlFor="email">Email:</label>
@@ -19,7 +29,7 @@ const RecuperarPassword = () => {
                             type="text"
                             name="email"
                             placeholder="Coloca tu email"
-                            onChange={texto => setEmail(texto)}
+                            onChange={e => setEmail(e.target.value)}
                         />
                     </div>
                     <div className="campo enviar">

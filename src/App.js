@@ -10,12 +10,14 @@ import UsuarioState from './context/usuarios/usuarioState';
 import tokenAuth from './config/token';
 import RutaPrivada from './components/routes/RutaPrivada';
 import RecuperarPassword from './components/auth/RecuperarPassword';
+import Reestablecer from './components/auth/Reestablecer';
 
 // Se revisa si existe un token
 const token = localStorage.getItem('token');
 if (token) {
   tokenAuth(token);
 }
+
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
               <Route exact path="/" component={Login} />
               <Route exact path="/nueva-cuenta" component={NuevaCuenta} />
               <Route exact path="/recuperar-password" component={RecuperarPassword} />
+              <Route path="/reestablecer-password" component={Reestablecer} />
               <RutaPrivada exact path="/proyectos" component={Proyectos} />
             </Switch>
           </Router>

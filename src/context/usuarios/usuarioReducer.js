@@ -29,6 +29,8 @@ export default (state, action) => {
             }
 
         case ERROR_USUARIO:
+            localStorage.removeItem('token');
+            tokenAuth(null);
             return {
                 ...state,
                 errores: action.payload.map(error => error.message),
@@ -37,6 +39,8 @@ export default (state, action) => {
             }
 
         case REDIRECCIONAR:
+            localStorage.removeItem('token');
+            tokenAuth(null);
             return {
                 ...state,
                 redireccionar: false,
@@ -51,12 +55,8 @@ export default (state, action) => {
                 cargando: false
             }
 
-        case ERROR_AUTENTICADO:
-            return {
-                ...state,
-                cargando: false
-            }
 
+        case ERROR_AUTENTICADO:
         case CERRAR_SESION:
             localStorage.removeItem('token');
             tokenAuth(null);
