@@ -21,13 +21,12 @@ const TareaState = props => {
     const agregarTarea = async tarea => {
         try {
             const resp = await clienteAxios.post(`/tareas`, tarea);
-            // console.log(resp.data.tarea);
             dispatch({
                 type: AGREGAR_TAREA,
                 payload: resp.data.tarea
             })
         } catch (error) {
-            console.log(error);
+            console.log({ error });
         }
     }
 
@@ -39,20 +38,19 @@ const TareaState = props => {
                 payload: resp.data.tareas
             })
         } catch (error) {
-            console.log(error);
+            console.log({ error });
         }
     }
 
     const editarTarea = async tarea => {
         try {
             const resp = await clienteAxios.put(`/tareas/${tarea.id}`, tarea);
-            // console.log(resp.data.tarea);
             dispatch({
                 type: EDITAR_TAREA,
                 payload: resp.data.tarea
             });
         } catch (error) {
-            console.log(error);
+            console.log({ error });
         }
     }
 
@@ -64,7 +62,7 @@ const TareaState = props => {
                 payload: id
             })
         } catch (error) {
-            console.log(error);
+            console.log({ error });
         }
     }
 

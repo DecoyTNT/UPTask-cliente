@@ -3,7 +3,7 @@ import proyectoContext from '../../context/proyectos/proyectoContext';
 
 const NuevoProyecto = () => {
 
-    const { errorformulario, proyectoseleccionado, agregarProyecto, editarProyecto } = useContext(proyectoContext);
+    const { mensaje, errorformulario, proyectoseleccionado, agregarProyecto, editarProyecto } = useContext(proyectoContext);
 
     const [proyecto, setProyecto] = useState({
         nombre: ''
@@ -43,7 +43,7 @@ const NuevoProyecto = () => {
         <div className="contenido-principal">
 
             {proyectoseleccionado ? <h1>Editar Proyecto</h1> : <h1>Nuevo Proyecto</h1>}
-            {errorformulario && <div className="alerta error">Hay un error</div>}
+            {errorformulario && <div className="alerta error">{mensaje}</div>}
 
             <form
                 className="agregar-proyecto"

@@ -12,8 +12,6 @@ const SideBar = () => {
         // eslint-disable-next-line
     }, []);
 
-    // console.log(proyectos)
-
     const onclickProyecto = proyectoId => {
         obtenerProyectoId(proyectoId);
         obtenerTareasProyecto(proyectoId);

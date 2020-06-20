@@ -16,13 +16,15 @@ export default (state, action) => {
             return {
                 ...state,
                 formulario: true,
-                proyectoseleccionado: null
+                proyectoseleccionado: null,
+                mensaje: null
             }
 
         case OBTENER_PROYECTOS:
             return {
                 ...state,
-                proyectos: action.payload
+                proyectos: action.payload,
+                mensaje: null
             }
 
         case AGREGAR_PROYECTO:
@@ -34,13 +36,15 @@ export default (state, action) => {
                 ],
                 formulario: false,
                 errorformulario: false,
-                editar: false
+                editar: false,
+                mensaje: null
             };
 
         case PROYECTO_ERROR:
             return {
                 ...state,
-                errorformulario: true
+                errorformulario: true,
+                mensaje: action.payload
             }
 
         case SELECCIONAR_PROYECTO:
@@ -48,7 +52,8 @@ export default (state, action) => {
                 ...state,
                 proyectoseleccionado: action.payload,
                 formulario: false,
-                editar: false
+                editar: false,
+                mensaje: null
             }
 
         case MOSTRAR_EDITAR_PROYECTO:
@@ -56,7 +61,8 @@ export default (state, action) => {
                 ...state,
                 editar: true,
                 formulario: true,
-                errorformulario: false
+                errorformulario: false,
+                mensaje: null
             }
 
         case EDITAR_PROYECTO:
@@ -66,14 +72,16 @@ export default (state, action) => {
                 editar: false,
                 formulario: false,
                 proyectoseleccionado: action.payload,
-                errorformulario: false
+                errorformulario: false,
+                mensaje: null
             }
 
         case ELIMINAR_PROYECTO:
             return {
                 ...state,
                 proyectoseleccionado: null,
-                proyectos: state.proyectos.filter(proyecto => proyecto.id !== action.payload)
+                proyectos: state.proyectos.filter(proyecto => proyecto.id !== action.payload),
+                mensaje: null
             }
 
         default:

@@ -20,7 +20,8 @@ const ProyectoState = props => {
         formulario: false,
         errorformulario: false,
         proyectoseleccionado: null,
-        editar: false
+        editar: false,
+        mensaje: null
     }
 
     const [state, dispatch] = useReducer(proyectoReducer, initialState);
@@ -34,7 +35,6 @@ const ProyectoState = props => {
     const obtenerProyectos = async () => {
         try {
             const resp = await clienteAxios.get('/proyectos');
-            // console.log(resp);
             dispatch({
                 type: OBTENER_PROYECTOS,
                 payload: resp.data.proyectos
@@ -52,7 +52,7 @@ const ProyectoState = props => {
                 payload: resp.data.proyecto
             })
         } catch (error) {
-            console.log(error);
+            console.log({ error });
         }
     }
 
@@ -65,21 +65,22 @@ const ProyectoState = props => {
     const editarProyecto = async proyecto => {
         try {
             const resp = await clienteAxios.put(`/proyectos/${proyecto.id}`, proyecto);
-            console.log(resp.data.proyecto);
             dispatch({
                 type: EDITAR_PROYECTO,
                 payload: resp.data.proyecto
             })
         } catch (error) {
-            console.log(error);
-            dispatch({
-                type: PROYECTO_ERROR
-            });
+            console.log({ error });
+            if (error.response.data.errors.nombre.msg) {
+                dispatch({
+                    type: PROYECTO_ERROR,
+                    payload: error.response.data.errors.nombre.msg
+                });
+            };
         }
     }
 
     const eliminarProyecto = async id => {
-        console.log(id);
         try {
             await clienteAxios.delete(`/proyectos/${id}`);
             dispatch({
@@ -87,25 +88,25 @@ const ProyectoState = props => {
                 payload: id
             })
         } catch (error) {
-            console.log(error);
+            console.log({ error });
         }
     }
 
     const agregarProyecto = async proyecto => {
         try {
-            // TODO: completar una vez terminada la parte del backend
             const resp = await clienteAxios.post('/proyectos', proyecto);
-
-            // console.log(proyecto);
             dispatch({
                 type: AGREGAR_PROYECTO,
                 payload: resp.data.proyecto
             })
         } catch (error) {
-            console.log(error);
-            dispatch({
-                type: PROYECTO_ERROR
-            });
+            console.log({ error });
+            if (error.response.data.errors.nombre.msg) {
+                dispatch({
+                    type: PROYECTO_ERROR,
+                    payload: error.response.data.errors.nombre.msg
+                });
+            };
         }
     }
 
@@ -117,6 +118,7 @@ const ProyectoState = props => {
                 formulario: state.formulario,
                 proyectoseleccionado: state.proyectoseleccionado,
                 editar: state.editar,
+                mensaje: state.mensaje,
                 mostrarFormulario,
                 obtenerProyectos,
                 obtenerProyectoId,

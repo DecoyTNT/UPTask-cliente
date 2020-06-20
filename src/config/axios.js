@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const clienteAxios = axios.create({
-    baseURL: 'http://localhost:4000'
+    baseURL: 'https://uptasknode.herokuapp.com/'
 });
 
 export default clienteAxios;

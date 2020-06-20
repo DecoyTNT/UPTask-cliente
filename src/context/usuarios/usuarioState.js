@@ -20,8 +20,7 @@ const UsuarioState = props => {
         redireccionar: false,
         errores: null,
         cargando: true,
-        usuariopassword: null,
-        tokenpassword: null
+        reestablecer: false
     }
 
     const [state, dispatch] = useReducer(usuarioReducer, initialState);
@@ -34,18 +33,19 @@ const UsuarioState = props => {
                 payload: resp.data.usuario
             });
         } catch (error) {
-            // console.log(error.response.data.error);
-            dispatch({
-                type: ERROR_USUARIO,
-                payload: error.response.data.error.errors
-            });
+            console.log({ error });
+            if (error.response.data.error) {
+                dispatch({
+                    type: ERROR_USUARIO,
+                    payload: error.response.data.error.errors
+                });
+            };
         }
     }
 
     const loginUsuario = async usuario => {
         try {
             const resp = await clienteAxios.post('/usuarios/login', usuario);
-            // console.log(resp.data);
             dispatch({
                 type: LOGIN_EXITOSO,
                 payload: resp.data
@@ -53,7 +53,7 @@ const UsuarioState = props => {
 
             usuarioAutenticado();
         } catch (error) {
-            console.log(error.response);
+            console.log({ error });
         }
     }
 
@@ -87,8 +87,7 @@ const UsuarioState = props => {
 
     const tokenPassword = async email => {
         try {
-            const resp = await clienteAxios.post('/usuarios/reestablecer', { email })
-            console.log(resp);
+            await clienteAxios.post('/usuarios/reestablecer', { email })
         } catch (error) {
             console.log({ error });
         }
@@ -96,8 +95,7 @@ const UsuarioState = props => {
 
     const cambiarPassword = async (password, tokenPassword) => {
         try {
-            const resp = await clienteAxios.post(`/usuarios/reestablecer/${tokenPassword}`, { password });
-            console.log(resp);
+            await clienteAxios.post(`/usuarios/reestablecer/${tokenPassword}`, { password });
         } catch (error) {
             console.log({ error });
         }
@@ -112,8 +110,7 @@ const UsuarioState = props => {
                 redireccionar: state.redireccionar,
                 errores: state.errores,
                 cargando: state.cargando,
-                usuariopassword: state.usuariopassword,
-                tokenpassword: state.tokenpassword,
+                reestablecer: state.reestablecer,
                 crearUsuario,
                 loginUsuario,
                 usuarioAutenticado,

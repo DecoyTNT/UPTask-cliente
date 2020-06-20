@@ -1,12 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import usuarioContext from '../../context/usuarios/usuarioContext';
 
-const RecuperarPassword = () => {
+const RecuperarPassword = (props) => {
 
     const [email, setEmail] = useState('');
 
-    const { tokenPassword } = useContext(usuarioContext);
+    const { reestablecer, tokenPassword } = useContext(usuarioContext);
+
+    useEffect(() => {
+        if (reestablecer) {
+            props.history.push('/');
+        }
+        // eslint-disable-next-line
+    }, [reestablecer]);
 
     const onSubmitForm = e => {
         e.preventDefault();

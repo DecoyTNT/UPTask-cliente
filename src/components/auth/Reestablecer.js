@@ -1,15 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import usuarioContext from '../../context/usuarios/usuarioContext';
 
-const Reestablecer = () => {
+const Reestablecer = (props) => {
 
     const [password, setPassword] = useState('');
 
-    const { cambiarPassword } = useContext(usuarioContext);
+    const { reestablecer, cambiarPassword } = useContext(usuarioContext);
+
+    useEffect(() => {
+        if (reestablecer) {
+            props.history.push('/');
+        }
+        // eslint-disable-next-line
+    }, [reestablecer]);
 
     const partes = window.location.href.split('/');
     const tokenPassword = partes[partes.length - 1];
-    console.log(password);
 
     const onSubmitForm = e => {
         e.preventDefault();

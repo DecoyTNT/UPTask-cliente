@@ -17,16 +17,19 @@ const Proyectos = () => {
         }
         // eslint-disable-next-line
     }, []);
-    // console.log(proyectoseleccionado);
 
     return (
         <>
             <Header />
-            <main className="contenedor">
-                <SideBar />
-                {formulario && <NuevoProyecto />}
-                {proyectoseleccionado && <Tareas />}
-            </main>
+            <div className="contenedor-app">
+                <main className="contenedor">
+                    <SideBar />
+                    <div className="seccion-principal">
+                        {formulario && <NuevoProyecto />}
+                        {proyectoseleccionado && <Tareas />}
+                    </div>
+                </main>
+            </div>
         </>
     );
 }

@@ -66,7 +66,7 @@ const Login = (props) => {
                     </div>
                     <div className="campo acciones">
                         <Link to={'/nueva-cuenta'}>Crear cuenta</Link>
-                        <Link to={'/recuperar-password'}>Olvidaste tu contraseña?</Link>
+                        {/* <Link to={'/recuperar-password'}>Olvidaste tu contraseña?</Link> */}
                     </div>
                 </form>
             </div>
